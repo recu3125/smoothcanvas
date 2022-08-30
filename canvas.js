@@ -1,4 +1,4 @@
-const smoothnum = 50
+const smoothnum = 30
 const canvasresol = 3
 
 var canvas = document.getElementById('canvas')
@@ -79,12 +79,12 @@ function draw() {
   var xsum = 0
   var ysum = 0
   for (var i = 0; i < smoothnum; i++) {
-    xsum += mouselist[i].x
-    ysum += mouselist[i].y
+    xsum += mouselist[i].x * (i+1)
+    ysum += mouselist[i].y * (i+1)
   }
   ctx.beginPath()
-  afterx = xsum / smoothnum
-  aftery = ysum / smoothnum
+  aftery = ysum / (smoothnum*(smoothnum+1)/2)
+  afterx = xsum / (smoothnum*(smoothnum+1)/2)
   ctx.moveTo(beforexy.x, beforexy.y)
   ctx.lineTo(afterx, aftery)
   beforexy.x = afterx
