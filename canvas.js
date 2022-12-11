@@ -1,4 +1,11 @@
-const smoothnum = 30
+var smoothnum = 30
+var smoothtype = 0
+
+function syncrange() {
+  smoothtype = document.getElementById('type').value*1
+  smoothnum = document.getElementById('strength').value*1
+}
+
 const canvasresol = 3
 
 var canvas = document.getElementById('canvas')
@@ -43,7 +50,7 @@ function handleMouseMove(event) {
 canvas.addEventListener('mousedown', linestart)
 canvas.addEventListener('mouseup', lineend)
 
-setInterval(draw, 20)
+setInterval(draw, 1)
 
 function linestart() {
   beforexy.x = mouse.x
@@ -79,12 +86,24 @@ function draw() {
   var xsum = 0
   var ysum = 0
   for (var i = 0; i < smoothnum; i++) {
-    xsum += mouselist[i].x * (i+1)
-    ysum += mouselist[i].y * (i+1)
+    if (false) {
+      xsum += mouselist[i].x
+      ysum += mouselist[i].y
+    }
+    else {
+      xsum += mouselist[i].x * (i + 1)
+      ysum += mouselist[i].y * (i + 1)
+    }
   }
   ctx.beginPath()
-  aftery = ysum / (smoothnum*(smoothnum+1)/2)
-  afterx = xsum / (smoothnum*(smoothnum+1)/2)
+  if (false) {
+    aftery = ysum / smoothnum
+    afterx = xsum / smoothnum 
+  }
+  else {
+    aftery = ysum / (smoothnum * (smoothnum + 1) / 2)
+    afterx = xsum / (smoothnum * (smoothnum + 1) / 2)
+  }
   ctx.moveTo(beforexy.x, beforexy.y)
   ctx.lineTo(afterx, aftery)
   beforexy.x = afterx

@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body style="margin: 0px;">
+  <div style="width: 90vw; height: 20px; position:absolute;">
+    <label>TYPE<input type="range" min="0" max="1" value="0" id="type" style="width: 60px;" onchange="syncrange()"></label>
+    <label>Strength<input type="range" min="0" max="200" value="70" id="strength" style="width: 180px;" onchange="syncrange()"></label>
+  </div>
   <canvas id="canvas" style="margin: 0px; width: 100vw; height:100vh"></canvas>
 </body>
 <script type="text/javascript" src="canvas.js"> </script>
+
 </html>
